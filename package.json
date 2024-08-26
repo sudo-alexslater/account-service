@@ -1,0 +1,18 @@
+{
+	"name": "@alexslater-io/auth-service-infra",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"postinstall": "cd core && npm i && cd ../infra && npm i && cd ../common && npm i"
+	},
+	"author": "",
+	"license": "ISC",
+	"description": "",
+	"devDependencies": {
+		"@types/node": "^22.2.0"
+	},
+	"dependencies": {
+		"express": "^4.19.2"
+	}
+}

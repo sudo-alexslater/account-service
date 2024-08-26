@@ -1,0 +1,44 @@
+{
+	"name": "@alexslater-io/auth-service-core",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"test:unit": "jest --config jest.config.unit.ts",
+		"build:lambdas": "webpack",
+		"build:api": "cd ../api && npm run build",
+		"build": "npm run build:api && npm run build:lambdas"
+	},
+	"author": "",
+	"license": "ISC",
+	"description": "",
+	"devDependencies": {
+		"@types/aws-lambda": "^8.10.141",
+		"@types/express": "^4.17.21",
+		"@types/jest": "^29.5.12",
+		"@types/node": "^20.14.12",
+		"jest": "^29.7.0",
+		"nodemon": "^3.1.4",
+		"swagger-typescript-api": "^13.0.19",
+		"ts-jest": "^29.2.3",
+		"ts-loader": "^9.5.1",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.5.3",
+		"webpack": "^5.93.0",
+		"webpack-cli": "^5.1.4"
+	},
+	"dependencies": {
+		"@alexslater-io/common": "^1.0.2",
+		"@aws-sdk/client-dynamodb": "^3.616.0",
+		"@aws-sdk/client-lambda": "^3.616.0",
+		"@aws-sdk/lib-dynamodb": "^3.616.0",
+		"@grpc/grpc-js": "^1.11.1",
+		"@grpc/proto-loader": "^0.7.13",
+		"@tensorflow/tfjs-node": "^4.20.0",
+		"express": "^4.19.2",
+		"grpc-tools": "^1.12.4"
+	},
+	"workspaces": [
+		"../api",
+		"../common"
+	]
+}
