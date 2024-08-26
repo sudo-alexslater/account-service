@@ -13,7 +13,7 @@ export class LobbyService {
 
 	public create({ minPlayers, maxPlayers }: LobbyOptions): Lobby {
 		return {
-			id: generateResourceId("auth", "lobby"),
+			id: generateResourceId("customer", "lobby"),
 			minPlayers,
 			maxPlayers,
 		};

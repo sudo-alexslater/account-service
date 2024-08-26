@@ -1,6 +1,6 @@
 resource "aws_api_gateway_rest_api" "core" {
   name           = "${local.prefix}-api"
-  description    = "auth API"
+  description    = "Customer API"
   api_key_source = "HEADER"
   body           = data.template_file.core_oas.rendered
 

@@ -1,12 +1,12 @@
 openapi: 3.0.3
 
 info:
-  title: auth API
-  description: API for interacting with auth APIs
+  title: Customer API
+  description: API for interacting with customer APIs
   version: 0.1.0
 servers:
-  - url: "https://auth.alexslater.io"
-    description: Production API endpoint for the auth API
+  - url: "https://customer.alexslater.io"
+    description: Production API endpoint for the customer API
 
 paths:
   /health:
@@ -29,7 +29,7 @@ paths:
       x-amazon-apigateway-auth:
         type: "NONE"
       x-amazon-apigateway-api-key-source: "HEADER"
-  /auth:
+  /customer:
     get:
       operationId: list-lobbies
       description: List lobbies endpoint

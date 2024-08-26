@@ -1,4 +1,4 @@
-import { CreateLobbyRequest } from "@alexslater-io/auth-service-api";
+import { CreateLobbyRequest } from "@alexslater-io/customer-service-api";
 import { APIGatewayEvent } from "aws-lambda";
 import { CreateLobby } from "../features/CreateLobby";
 

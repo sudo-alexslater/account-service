@@ -17,7 +17,7 @@ export class MockLobbyService implements MockOf<LobbyService> {
 	public reset(): void {
 		console.log("Resetting Mock Lobby Service");
 		this.mockedCreateResult = {
-			id: generateResourceId("auth", "lobby"),
+			id: generateResourceId("customer", "lobby"),
 			minPlayers: 0,
 			maxPlayers: 5,
 		};

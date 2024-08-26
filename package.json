@@ -1,5 +1,5 @@
 {
-	"name": "@alexslater-io/auth-service-infra",
+	"name": "@alexslater-io/customer-service-infra",
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {

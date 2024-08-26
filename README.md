@@ -1,9 +1,8 @@
-# auth Service
+# Customer Service
 
 ## Prerequisites
 
 - [Docker](https://docs.docker.com/get-docker/)
 - [Protoc Compiler](https://grpc.io/docs/protoc-installation/)
 
-# auth-service
-# auth-service
+# customer-service

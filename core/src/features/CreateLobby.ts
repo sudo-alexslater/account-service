@@ -1,4 +1,4 @@
-import { Lobby, LobbyService } from "@alexslater-io/auth-service-common";
+import { Lobby, LobbyService } from "@alexslater-io/customer-service-common";
 import { IFeature } from "@alexslater-io/common";
 
 export type CreateLobbyOptions = {
