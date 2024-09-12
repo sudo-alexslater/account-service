@@ -1,16 +1,16 @@
 
-resource "aws_dynamodb_table" "lobbies" {
-  name         = "${local.prefix}-lobbies"
-  hash_key     = "lobbyId"
+resource "aws_dynamodb_table" "customers" {
+  name         = "${local.prefix}-customers"
+  hash_key     = "customerId"
   billing_mode = "PAY_PER_REQUEST"
 
   attribute {
-    name = "lobbyId"
+    name = "customerId"
     type = "S"
   }
 }
-resource "aws_iam_policy" "lobby_dynamo_policy" {
-  name        = "${local.prefix}-lobby-dynamo-policy"
+resource "aws_iam_policy" "customer_dynamo_policy" {
+  name        = "${local.prefix}-customer-dynamo-policy"
   description = "Policy for Lambda to access DynamoDB"
   policy      = <<EOF
 {
@@ -24,7 +24,7 @@ resource "aws_iam_policy" "lobby_dynamo_policy" {
         "dynamodb:UpdateItem",
         "dynamodb:DeleteItem"
       ],
-      "Resource": "${aws_dynamodb_table.lobbies.arn}"
+      "Resource": "${aws_dynamodb_table.customers.arn}"
     }
   ]
 }

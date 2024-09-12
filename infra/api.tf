@@ -13,9 +13,10 @@ data "template_file" "core_oas" {
   template = file("${path.root}/../core/api/core.yml")
 
   vars = {
-    healthcheck_arn  = "${module.healthcheck.arn}"
-    list_lobbies_arn = "${module.list_lobbies.arn}"
-    create_lobby_arn = "${module.create_lobby.arn}"
+    healthcheck_arn        = "${module.healthcheck.arn}"
+    list_customers_arn     = "${module.list_customers.arn}"
+    create_customer_arn    = "${module.create_customer.arn}"
+    cognito_user_pool_arns = tolist(data.aws_cognito_user_pools.selected.arns)[0]
 
     aws_region              = var.aws_region
     lambda_identity_timeout = var.lambda_identity_timeout

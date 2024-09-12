@@ -16,7 +16,7 @@
 		"typescript": "^5.5.4"
 	},
 	"dependencies": {
-		"@alexslater-io/common": "^1.0.2",
+		"@alexslater-io/common": "^1.0.3",
 		"@aws-sdk/lib-dynamodb": "^3.624.0"
 	}
 }

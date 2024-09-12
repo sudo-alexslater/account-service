@@ -31,8 +31,8 @@ paths:
       x-amazon-apigateway-api-key-source: "HEADER"
   /customer:
     get:
-      operationId: list-lobbies
-      description: List lobbies endpoint
+      operationId: list-customers
+      description: List customers endpoint
       parameters:
         - name: limit
           in: query
@@ -50,40 +50,51 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Lobbies"
+                $ref: "#/components/schemas/Customers"
+      security:
+        - main_auth: []
 
       x-amazon-apigateway-integration:
-        uri: "arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${list_lobbies_arn}/invocations"
+        uri: "arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${list_customers_arn}/invocations"
         httpMethod: "POST"
         timeoutInMillis: ${lambda_identity_timeout}
         type: "aws_proxy"
-      x-amazon-apigateway-auth:
-        type: "NONE"
       x-amazon-apigateway-api-key-source: "HEADER"
     post:
-      operationId: create-lobby
-      description: Create lobby endpoint
+      operationId: create-customer
+      description: Create customer endpoint
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateLobbyRequest"
+              $ref: "#/components/schemas/CreateCustomerRequest"
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Lobby"
+                $ref: "#/components/schemas/Customer"
 
       x-amazon-apigateway-integration:
-        uri: "arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${create_lobby_arn}/invocations"
+        uri: "arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${create_customer_arn}/invocations"
         httpMethod: "POST"
         timeoutInMillis: ${lambda_identity_timeout}
         type: "aws_proxy"
       x-amazon-apigateway-auth:
         type: "NONE"
       x-amazon-apigateway-api-key-source: "HEADER"
+securityDefinitions:
+  main_auth:
+    type: apiKey
+    name: Authorization
+    in: header
+    x-amazon-apigateway-authtype: COGNITO_USER_POOLS
+    x-amazon-apigateway-authorizer:
+      type: "COGNITO_USER_POOLS"
+      providerARNs:
+        - ${cognito_user_pool_arn}
+
 components:
   schemas:
     id:
@@ -93,22 +104,22 @@ components:
       properties:
         message:
           type: string
-    Lobby:
+    Customer:
       type: object
       properties:
         id:
           $ref: "#/components/schemas/id"
-    Lobbies:
+    Customers:
       type: array
       items:
-        $ref: "#/components/schemas/Lobby"
-    CreateLobbyRequest:
+        $ref: "#/components/schemas/Customer"
+    CreateCustomerRequest:
       type: object
       properties:
-        maxPlayers:
-          type: integer
-        minPlayers:
-          type: integer
+        firstName:
+          type: string
+        lastName:
+          type: string
       required:
-        - maxPlayers
-        - minPlayers
+        - firstName
+        - lastName

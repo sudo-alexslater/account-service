@@ -18,53 +18,53 @@ resource "aws_lambda_permission" "apigw_invoke_healthcheck" {
 }
 
 ///////////////////////////////////////////////////////////////
-// List Lobbies
+// List Customers
 ///////////////////////////////////////////////////////////////
-module "list_lobbies" {
+module "list_customers" {
   source = "./modules/lambda"
-  name   = "list-lobbies"
+  name   = "list-customers"
   prefix = local.prefix
   environment_variables = {
-    LOBBY_TABLE_NAME = aws_dynamodb_table.lobbies.name
+    LOBBY_TABLE_NAME = aws_dynamodb_table.customers.name
   }
 }
-resource "aws_lambda_permission" "apigw_invoke_list_lobbies" {
+resource "aws_lambda_permission" "apigw_invoke_list_customers" {
   statement_id  = "AllowAPIGatewayInvoke"
   action        = "lambda:InvokeFunction"
-  function_name = module.list_lobbies.name
+  function_name = module.list_customers.name
   principal     = "apigateway.amazonaws.com"
 
   # The /*/* portion grants access from any method on any resource
   # within the specified API Gateway.
   source_arn = "${aws_api_gateway_rest_api.core.execution_arn}/*/*"
 }
-resource "aws_iam_role_policy_attachment" "list_lobbies_dynamo" {
-  role       = module.list_lobbies.role_name
-  policy_arn = aws_iam_policy.lobby_dynamo_policy.arn
+resource "aws_iam_role_policy_attachment" "list_customers_dynamo" {
+  role       = module.list_customers.role_name
+  policy_arn = aws_iam_policy.customer_dynamo_policy.arn
 }
 
 ///////////////////////////////////////////////////////////////
-// Create Lobby
+// Create Customer
 ///////////////////////////////////////////////////////////////
-module "create_lobby" {
+module "create_customer" {
   source = "./modules/lambda"
-  name   = "create-lobby"
+  name   = "create-customer"
   prefix = local.prefix
   environment_variables = {
-    LOBBY_TABLE_NAME = aws_dynamodb_table.lobbies.name
+    LOBBY_TABLE_NAME = aws_dynamodb_table.customers.name
   }
 }
-resource "aws_lambda_permission" "apigw_invoke_create_lobby" {
+resource "aws_lambda_permission" "apigw_invoke_create_customer" {
   statement_id  = "AllowAPIGatewayInvoke"
   action        = "lambda:InvokeFunction"
-  function_name = module.create_lobby.name
+  function_name = module.create_customer.name
   principal     = "apigateway.amazonaws.com"
 
   # The /*/* portion grants access from any method on any resource
   # within the specified API Gateway.
   source_arn = "${aws_api_gateway_rest_api.core.execution_arn}/*/*"
 }
-resource "aws_iam_role_policy_attachment" "create_lobby_dynamo" {
-  role       = module.create_lobby.role_name
-  policy_arn = aws_iam_policy.lobby_dynamo_policy.arn
+resource "aws_iam_role_policy_attachment" "create_customer_dynamo" {
+  role       = module.create_customer.role_name
+  policy_arn = aws_iam_policy.customer_dynamo_policy.arn
 }

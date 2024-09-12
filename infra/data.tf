@@ -23,6 +23,9 @@ data "aws_subnets" "public" {
     SubnetType = "public"
   }
 }
+data "aws_cognito_user_pools" "core_auth_pool" {
+  name = "sandbox-base-core-auth-pool"
+}
 
 
 data "aws_caller_identity" "this" {}
