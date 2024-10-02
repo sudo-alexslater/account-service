@@ -10,13 +10,13 @@ resource "aws_api_gateway_rest_api" "core" {
 }
 
 data "template_file" "core_oas" {
-  template = file("${path.root}/../core/api/core.yml")
+  template = file("${path.root}/../api/specs/core.yml")
 
   vars = {
-    healthcheck_arn        = "${module.healthcheck.arn}"
-    list_customers_arn     = "${module.list_customers.arn}"
-    create_customer_arn    = "${module.create_customer.arn}"
-    cognito_user_pool_arns = tolist(data.aws_cognito_user_pools.selected.arns)[0]
+    healthcheck_arn       = "${module.healthcheck.arn}"
+    list_customers_arn    = "${module.list_customers.arn}"
+    create_customer_arn   = "${module.create_customer.arn}"
+    cognito_user_pool_arn = tolist(data.aws_cognito_user_pools.core_auth_pool.arns)[0]
 
     aws_region              = var.aws_region
     lambda_identity_timeout = var.lambda_identity_timeout

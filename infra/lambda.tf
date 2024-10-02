@@ -2,9 +2,10 @@
 // Healthcheck
 ///////////////////////////////////////////////////////////////
 module "healthcheck" {
-  source = "./modules/lambda"
-  name   = "healthcheck"
-  prefix = local.prefix
+  source    = "git@github.com:sudo-alexslater/terraform-modules.git//lambda?ref=main"
+  name      = "healthcheck"
+  code_path = "${path.root}/../core/dist/healthcheck.js"
+  prefix    = local.prefix
 }
 resource "aws_lambda_permission" "apigw_invoke_healthcheck" {
   statement_id  = "AllowAPIGatewayInvoke"
@@ -21,9 +22,10 @@ resource "aws_lambda_permission" "apigw_invoke_healthcheck" {
 // List Customers
 ///////////////////////////////////////////////////////////////
 module "list_customers" {
-  source = "./modules/lambda"
-  name   = "list-customers"
-  prefix = local.prefix
+  source    = "git@github.com:sudo-alexslater/terraform-modules.git//lambda?ref=main"
+  name      = "list-customers"
+  code_path = "${path.root}/../core/dist/list-customers.js"
+  prefix    = local.prefix
   environment_variables = {
     LOBBY_TABLE_NAME = aws_dynamodb_table.customers.name
   }
@@ -47,9 +49,10 @@ resource "aws_iam_role_policy_attachment" "list_customers_dynamo" {
 // Create Customer
 ///////////////////////////////////////////////////////////////
 module "create_customer" {
-  source = "./modules/lambda"
-  name   = "create-customer"
-  prefix = local.prefix
+  source    = "git@github.com:sudo-alexslater/terraform-modules.git//lambda?ref=main"
+  name      = "create-customer"
+  code_path = "${path.root}/../core/dist/create-customer.js"
+  prefix    = local.prefix
   environment_variables = {
     LOBBY_TABLE_NAME = aws_dynamodb_table.customers.name
   }

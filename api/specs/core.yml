@@ -29,7 +29,7 @@ paths:
       x-amazon-apigateway-auth:
         type: "NONE"
       x-amazon-apigateway-api-key-source: "HEADER"
-  /customer:
+  /customers:
     get:
       operationId: list-customers
       description: List customers endpoint
@@ -52,8 +52,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Customers"
       security:
-        - main_auth: []
-
+        - CognitoAuth: []
       x-amazon-apigateway-integration:
         uri: "arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${list_customers_arn}/invocations"
         httpMethod: "POST"
@@ -75,7 +74,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Customer"
-
+      security:
+        - CognitoAuth: []
       x-amazon-apigateway-integration:
         uri: "arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${create_customer_arn}/invocations"
         httpMethod: "POST"
@@ -84,18 +84,17 @@ paths:
       x-amazon-apigateway-auth:
         type: "NONE"
       x-amazon-apigateway-api-key-source: "HEADER"
-securityDefinitions:
-  main_auth:
-    type: apiKey
-    name: Authorization
-    in: header
-    x-amazon-apigateway-authtype: COGNITO_USER_POOLS
-    x-amazon-apigateway-authorizer:
-      type: "COGNITO_USER_POOLS"
-      providerARNs:
-        - ${cognito_user_pool_arn}
-
 components:
+  securitySchemes:
+    CognitoAuth:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: COGNITO_USER_POOLS
+      x-amazon-apigateway-authorizer:
+        type: "COGNITO_USER_POOLS"
+        providerARNs:
+          - ${cognito_user_pool_arn}
   schemas:
     id:
       type: string

@@ -1,6 +1,6 @@
 data "aws_vpc" "main" {
   tags = {
-    Name = "sandbox-base-infra-vpc"
+    Name = "sandbox-base-vpc"
   }
 }
 data "aws_subnets" "private" {

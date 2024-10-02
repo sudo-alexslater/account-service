@@ -22,7 +22,7 @@ module "acm" {
   source  = "terraform-aws-modules/acm/aws"
   version = "~> 4.0"
 
-  domain_name = "*.${local.domain_name}"
+  domain_name = local.full_domain
   zone_id     = data.cloudflare_zone.alexslaterio.id
 
   # subject_alternative_names = [
