@@ -1,12 +1,12 @@
 openapi: 3.0.3
 
 info:
-  title: Customer API
-  description: API for interacting with customer APIs
+  title: Account API
+  description: API for interacting with account APIs
   version: 0.1.0
 servers:
-  - url: "https://customer.alexslater.io"
-    description: Production API endpoint for the customer API
+  - url: "https://account.alexslater.io"
+    description: Production API endpoint for the account API
 
 paths:
   /health:
@@ -29,10 +29,10 @@ paths:
       x-amazon-apigateway-auth:
         type: "NONE"
       x-amazon-apigateway-api-key-source: "HEADER"
-  /customers:
+  /accounts:
     get:
-      operationId: list-customers
-      description: List customers endpoint
+      operationId: list-accounts
+      description: List accounts endpoint
       parameters:
         - name: limit
           in: query
@@ -50,34 +50,34 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Customers"
+                $ref: "#/components/schemas/Accounts"
       security:
         - CognitoAuth: []
       x-amazon-apigateway-integration:
-        uri: "arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${list_customers_arn}/invocations"
+        uri: "arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${list_accounts_arn}/invocations"
         httpMethod: "POST"
         timeoutInMillis: ${lambda_identity_timeout}
         type: "aws_proxy"
       x-amazon-apigateway-api-key-source: "HEADER"
     post:
-      operationId: create-customer
-      description: Create customer endpoint
+      operationId: create-account
+      description: Create account endpoint
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateCustomerRequest"
+              $ref: "#/components/schemas/CreateAccountRequest"
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Customer"
+                $ref: "#/components/schemas/Account"
       security:
         - CognitoAuth: []
       x-amazon-apigateway-integration:
-        uri: "arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${create_customer_arn}/invocations"
+        uri: "arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${create_account_arn}/invocations"
         httpMethod: "POST"
         timeoutInMillis: ${lambda_identity_timeout}
         type: "aws_proxy"
@@ -103,16 +103,16 @@ components:
       properties:
         message:
           type: string
-    Customer:
+    Account:
       type: object
       properties:
         id:
           $ref: "#/components/schemas/id"
-    Customers:
+    Accounts:
       type: array
       items:
-        $ref: "#/components/schemas/Customer"
-    CreateCustomerRequest:
+        $ref: "#/components/schemas/Account"
+    CreateAccountRequest:
       type: object
       properties:
         firstName:

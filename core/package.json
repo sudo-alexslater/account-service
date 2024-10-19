@@ -1,5 +1,5 @@
 {
-	"name": "@alexslater-io/customer-service-core",
+	"name": "@alexslater-io/account-service-core",
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {

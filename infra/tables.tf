@@ -1,16 +1,16 @@
 
-resource "aws_dynamodb_table" "customers" {
-  name         = "${local.prefix}-customers"
-  hash_key     = "customerId"
+resource "aws_dynamodb_table" "accounts" {
+  name         = "${local.prefix}-accounts"
+  hash_key     = "accountId"
   billing_mode = "PAY_PER_REQUEST"
 
   attribute {
-    name = "customerId"
+    name = "accountId"
     type = "S"
   }
 }
-resource "aws_iam_policy" "customer_dynamo_policy" {
-  name        = "${local.prefix}-customer-dynamo-policy"
+resource "aws_iam_policy" "account_dynamo_policy" {
+  name        = "${local.prefix}-account-dynamo-policy"
   description = "Policy for Lambda to access DynamoDB"
   policy      = <<EOF
 {
@@ -24,7 +24,7 @@ resource "aws_iam_policy" "customer_dynamo_policy" {
         "dynamodb:UpdateItem",
         "dynamodb:DeleteItem"
       ],
-      "Resource": "${aws_dynamodb_table.customers.arn}"
+      "Resource": "${aws_dynamodb_table.accounts.arn}"
     }
   ]
 }

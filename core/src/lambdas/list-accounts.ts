@@ -6,7 +6,7 @@ export const handler = (event: APIGatewayEvent) => {
 	return {
 		statusCode: 200,
 		body: JSON.stringify({
-			message: "list-customer",
+			message: "list-account",
 		}),
 	};
 };

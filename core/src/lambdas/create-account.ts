@@ -1,11 +1,11 @@
-import { CreateCustomerRequest } from "@alexslater-io/customer-service-api";
+import { CreateAccountRequest } from "@alexslater-io/account-service-api";
 import { APIGatewayEvent } from "aws-lambda";
-import { CreateCustomer } from "../features/CreateCustomer";
+import { CreateAccount } from "../features/CreateAccount";
 
 export const handler = (event: APIGatewayEvent) => {
 	console.log(event);
-	const body = JSON.parse(event.body || "{}") as CreateCustomerRequest;
-	const fn = new CreateCustomer();
+	const body = JSON.parse(event.body || "{}") as CreateAccountRequest;
+	const fn = new CreateAccount();
 	if (!body.firstName || !body.lastName) {
 		return {
 			statusCode: 400,
@@ -18,7 +18,7 @@ export const handler = (event: APIGatewayEvent) => {
 	return {
 		statusCode: 200,
 		body: JSON.stringify({
-			message: "create-customer",
+			message: "create-account",
 		}),
 	};
 };

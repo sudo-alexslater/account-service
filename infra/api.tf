@@ -1,6 +1,6 @@
 resource "aws_api_gateway_rest_api" "core" {
   name           = "${local.prefix}-api"
-  description    = "Customer API"
+  description    = "Account API"
   api_key_source = "HEADER"
   body           = data.template_file.core_oas.rendered
 
@@ -14,8 +14,8 @@ data "template_file" "core_oas" {
 
   vars = {
     healthcheck_arn       = "${module.healthcheck.arn}"
-    list_customers_arn    = "${module.list_customers.arn}"
-    create_customer_arn   = "${module.create_customer.arn}"
+    list_accounts_arn     = "${module.list_accounts.arn}"
+    create_account_arn    = "${module.create_account.arn}"
     cognito_user_pool_arn = tolist(data.aws_cognito_user_pools.core_auth_pool.arns)[0]
 
     aws_region              = var.aws_region

@@ -1,6 +1,6 @@
 locals {
   domain_name             = "alexslater.io"
-  subdomain               = "customer"
+  subdomain               = "account"
   full_domain             = "${local.subdomain}.${local.domain_name}"
   matchmaking_subdomain   = "matchmaking"
   matchmaking_full_domain = "${local.matchmaking_subdomain}.${local.domain_name}"

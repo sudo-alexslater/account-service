@@ -1,10 +1,10 @@
 {
-	"name": "@alexslater-io/customer-service",
+	"name": "@alexslater-io/account-service",
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"postinstall": "cd core && npm i && cd ../infra && npm i && cd ../common && npm i",
+		"postinstall": "cd api && npm i && cd ../core && npm i && cd ../infra && npm i && cd ../common && npm i",
 		"build": "cd api && npm run build && cd ../common && npm run build && cd ../core && npm run build"
 	},
 	"author": "",

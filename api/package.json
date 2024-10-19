@@ -1,5 +1,5 @@
 {
-	"name": "@alexslater-io/customer-service-api",
+	"name": "@alexslater-io/account-service-api",
 	"version": "1.0.0",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
